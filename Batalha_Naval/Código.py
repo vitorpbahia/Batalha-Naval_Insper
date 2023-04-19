@@ -23,7 +23,7 @@ tamanho=3
 dicfrotas={}
 nomenavio='porta-aviões'
 
-tabuleiro=[
+tabuleiro_jogo=[
   [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
   [0, 1, 0, 0, 0, 1, 1, 1, 1, 0],
   [0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
@@ -61,13 +61,13 @@ def preenche_frota(dicfrota, nomenavio, linha, coluna, orientacao, tamanho):
 
 #Código Faz jogada-----------------------------------------------------------------------------------------------
 
-def faz_jogada(tabuleiro, linha_jogador, coluna_jogador):
-    if tabuleiro[linha_jogador][coluna_jogador]==1:
-        tabuleiro[linha_jogador][coluna_jogador]='X'
-    if tabuleiro[linha_jogador][coluna_jogador]==0:
-        tabuleiro[linha_jogador][coluna_jogador]='-'
+def faz_jogada(tabuleiro_jogo, linha_jogador, coluna_jogador):
+    if tabuleiro_jogo[linha_jogador][coluna_jogador]==1:
+        tabuleiro_jogo[linha_jogador][coluna_jogador]='X'
+    if tabuleiro_jogo[linha_jogador][coluna_jogador]==0:
+        tabuleiro_jogo[linha_jogador][coluna_jogador]='-'
     
-    return tabuleiro
+    return tabuleiro_jogo
 
 
 
@@ -75,7 +75,7 @@ def faz_jogada(tabuleiro, linha_jogador, coluna_jogador):
 #Código Posiciona Frota-----------------------------------------------------------------------------------------
 
 def posiciona_frota(dicfrotas):
-    tabuleiro=[
+    tabuleiro_inicial=[
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -92,12 +92,32 @@ def posiciona_frota(dicfrotas):
 
         for i in range(len(coordenadas)):
             coordenadas1=coordenadas[i]
-            print(coordenadas1,'\n')
 
             for n in range(len(coordenadas1)):
                 coordenadas2=coordenadas1[n]
-                print(coordenadas2[0],coordenadas2[1])
-                tabuleiro[coordenadas2[0]][coordenadas2[1]]=1
+                tabuleiro_inicial[coordenadas2[0]][coordenadas2[1]]=1
     
-    return tabuleiro
+    return tabuleiro_inicial
     
+#Código da função Afundados---------------------------------------------------------------------------------------
+
+def afundados(dicfrotas, tabuleiro_jogo):
+    navios_afundados=0
+    for navio in dicfrotas:
+        coordenada=dicfrotas[navio]
+        for i in range(len(coordenada)):
+            coordenada1=coordenada[i]
+            c=1
+            for n in range(len(coordenada1)):
+                coordenada2=coordenada1[n]
+                
+                
+
+                for j in range(len(coordenada2)):
+                    if tabuleiro_jogo[coordenada2[0]][coordenada2[1]]!='X':
+                        c=0
+                
+                if n==len(coordenada1)-1 and c==1:
+                    navios_afundados+=1
+        return navios_afundados        
+                    
