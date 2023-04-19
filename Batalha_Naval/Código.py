@@ -58,8 +58,6 @@ def preenche_frota(dicfrota, nomenavio, linha, coluna, orientacao, tamanho):
     return dicfrota
 
 
-print(preenche_frota(dicfrota, nomenavio, linha, coluna, orientacao, tamanho))
-
 
 #Código Faz jogada-----------------------------------------------------------------------------------------------
 
@@ -73,15 +71,60 @@ def faz_jogada(tabuleiro, linha_jogador, coluna_jogador):
 
 
 
-tabuleiro=[
-  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0, 1, 1, 1, 1, 0],
-  [0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 1, 0, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-  [0, 1, 1, 1, 0, 0, 0, 1, 0, 0],
+
+#Código Posiciona Frota-----------------------------------------------------------------------------------------
+
+def posiciona_frota(dicfrotas):
+    tabuleiro=[
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-  [0, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
+    for navio in dicfrotas:
+        coordenadas=dicfrotas[navio]
+
+        for i in range(len(coordenadas)):
+            coordenadas1=coordenadas[i]
+            print(coordenadas1,'\n')
+
+            for n in range(len(coordenadas1)):
+                coordenadas2=coordenadas1[n]
+                print(coordenadas2[0],coordenadas2[1])
+                tabuleiro[coordenadas2[0]][coordenadas2[1]]=1
+    print(tabuleiro,'\n')
+    return tabuleiro
+    
+
+
+
+    
+    return tabuleiro
+
+dicfrotas = {
+    "porta-aviões":[
+      [[1,5],[1,6],[1,7],[1,8]]
+    ],
+    "navio-tanque":[
+      [[6,1],[6,2],[6,3]],
+      [[4,7],[5,7],[6,7]]
+    ],
+    "contratorpedeiro":[
+      [[1,1],[2,1]],
+      [[2,3],[3,3]],
+      [[9,1],[9,2]]
+    ],
+    "submarino": [
+      [[0,3]],
+      [[4,5]],
+      [[8,9]],
+      [[8,4]]
+    ],
+}
+x=posiciona_frota(dicfrotas)
