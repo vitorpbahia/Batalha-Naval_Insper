@@ -11,15 +11,16 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
             coordenadas=[linha, coluna+i]
             lista.append(coordenadas)
     return lista
+
         
 
 #variáveis--------------------------------------------------------------------------------------------------
 
 
 linha=2
-coluna=4
-orientacao='vertical'
-tamanho=3
+coluna=9
+orientacao='horizontal'
+tamanho=2
 dicfrotas={}
 nomenavio='porta-aviões'
 
@@ -73,7 +74,6 @@ def faz_jogada(tabuleiro_jogo, linha_jogador, coluna_jogador):
 
 
 #Código Posiciona Frota-----------------------------------------------------------------------------------------
-
 def posiciona_frota(dicfrotas):
     tabuleiro_inicial=[
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -121,3 +121,26 @@ def afundados(dicfrotas, tabuleiro_jogo):
                     navios_afundados+=1
         return navios_afundados        
                     
+#Código função posição válida----------------------------------------------------------------------------------------------
+def posicao_valida(dicfrotas,linha,coluna,orientacao,tamanho):
+
+    v=True
+    x=define_posicoes(linha, coluna, orientacao, tamanho)
+    for navios in dicfrotas:
+            coordenada=dicfrotas[navios]
+            for j in range(len(coordenada)):
+                coordenada1=coordenada[j]
+
+                for n in range(len(coordenada1)):
+
+                    
+                    for i in range(len(x)):
+                        if x[i] in coordenada1:
+                            v=False
+    for i in range(len(x)):
+        c=x[i]
+        if c[0]>9 or c[0]<0:
+            v=False
+        if c[1]>9 or c[1]<0:
+            v=False
+    return v
