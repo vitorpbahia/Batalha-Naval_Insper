@@ -43,20 +43,20 @@ coluna_jogador=1
 
 
 
-def preenche_frota(dicfrota, nomenavio, linha, coluna, orientacao, tamanho):
+def preenche_frota(dicfrotas, nomenavio, linha, coluna, orientacao, tamanho):
 
-    if nomenavio in dicfrota:
+    if nomenavio in dicfrotas:
 
-        x=dicfrota[nomenavio]
+        x=dicfrotas[nomenavio]
         x.append(define_posicoes(linha, coluna, orientacao, tamanho))
 
-    if nomenavio not in dicfrota:
+    if nomenavio not in dicfrotas:
 
-        dicfrota[nomenavio]=[]
-        x=dicfrota[nomenavio]
+        dicfrotas[nomenavio]=[]
+        x=dicfrotas[nomenavio]
         x.append(define_posicoes(linha, coluna, orientacao, tamanho))
 
-    return dicfrota
+    return dicfrotas
 
 
 
@@ -144,3 +144,30 @@ def posicao_valida(dicfrotas,linha,coluna,orientacao,tamanho):
         if c[1]>9 or c[1]<0:
             v=False
     return v
+
+
+
+#Posicionando frota
+lista=['porta-aviões', 'navio-tanque', 'navio-tanque', 'contratorpedeiro','contratorpedeiro','contratorpedeiro',
+'submarino','submarino','submarino','submarino']
+dictamanhos={'porta-aviões':4,'navio-tanque':3, 'contratorpedeiro':2,'submarino':1}
+for nomenavio in lista:
+    validacao=True
+    while validacao:
+        print('Insira as informações referentes ao navio {0} que possui tamanho {1}'.format(nomenavio, dictamanhos[nomenavio]))
+        linha=int(input('Linha: '))
+        coluna=int(input('Coluna: '))
+        if nomenavio!='submarino':
+            orientação=int(input("[1] Vertical [2] Horizontal > "))
+            if orientação==1:
+                orientacao='vertical'
+            if orientação==2:
+                orientacao='horizontal'
+        if posicao_valida(dicfrotas, linha, coluna, orientacao, dictamanhos[nomenavio])==True:
+            dicfrotas=preenche_frota(dicfrotas, nomenavio, linha, coluna, orientacao, dictamanhos[nomenavio])
+            validacao=False
+        else:
+            print('Esta posição não está válida!') 
+print(dicfrotas)                    
+
+        
