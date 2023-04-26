@@ -119,7 +119,7 @@ def afundados(dicfrotas, tabuleiro_jogo):
                 
                 if n==len(coordenada1)-1 and c==1:
                     navios_afundados+=1
-        return navios_afundados        
+    return navios_afundados        
                     
 #Código função posição válida----------------------------------------------------------------------------------------------
 def posicao_valida(dicfrotas,linha,coluna,orientacao,tamanho):
@@ -168,6 +168,75 @@ for nomenavio in lista:
             validacao=False
         else:
             print('Esta posição não está válida!') 
-print(dicfrotas)                    
+                   
+#monta o tabuleiro-------------------------------------------------------------------------------------------------------
 
-        
+def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
+        texto = ''
+        texto += '   0  1  2  3  4  5  6  7  8  9         0  1  2  3  4  5  6  7  8  9\n'
+        texto += '_______________________________      _______________________________\n'
+
+        for linha in range(len(tabuleiro_jogador)):
+            jogador_info = '  '.join([str(item) for item in tabuleiro_jogador[linha]])
+            oponente_info = '  '.join([info if str(info) in 'X-' else '0' for info in tabuleiro_oponente[linha]])
+            texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
+        return texto
+
+#Jogadas do jogador----------------------------------------------------------------------------------------------------------
+
+frota_oponente = {
+    'porta-aviões': [
+        [[9, 1], [9, 2], [9, 3], [9, 4]]
+    ],
+    'navio-tanque': [
+        [[6, 0], [6, 1], [6, 2]],
+        [[4, 3], [5, 3], [6, 3]]
+    ],
+    'contratorpedeiro': [
+        [[1, 6], [1, 7]],
+        [[0, 5], [1, 5]],
+        [[3, 6], [3, 7]]
+    ],
+    'submarino': [
+        [[2, 7]],
+        [[0, 6]],
+        [[9, 7]],
+        [[7, 6]]
+    ]
+}
+
+tabuleiro_oponente=posiciona_frota(frota_oponente)
+tabuleiro_jogador=posiciona_frota(dicfrotas)
+
+jogando=True
+
+while jogando:
+    
+    lista_jogadas=[]
+
+    plinha=True
+    while plinha:
+        linha_ataque=int(input("Linha em que deseja atacar: "))
+        if linha_ataque>9 or linha_ataque<0:
+            print('Linha inválida!')
+        else:
+            plinha=False
+
+    pcoluna=True
+    while pcoluna:
+        coluna_ataque=int(input("Coluna em que deseja atacar: "))
+        if coluna_ataque>9 or coluna_ataque<0:
+            print('Coluna inválida!')
+        else:
+            pcoluna=False
+    x=[linha_ataque, coluna_ataque]
+    if x in lista_jogadas:
+        print('A posição linha {0} e coluna {1} já foi informada anteriormente'.format(linha_ataque, coluna_ataque))
+    else:
+        lista_jogadas.append(x)
+        tabuleiro_oponente=faz_jogada(tabuleiro_oponente, linha_ataque, coluna_ataque)
+        if afundados(frota_oponente, tabuleiro_oponente)==10:
+            print('Parabéns! Você derrubou todos os navios do seu oponente!')
+            jogando=False
+
+    
