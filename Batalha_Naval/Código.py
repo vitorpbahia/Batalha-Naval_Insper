@@ -211,6 +211,7 @@ tabuleiro_jogador=posiciona_frota(dicfrotas)
 jogando=True
 
 while jogando:
+    print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
     
     lista_jogadas=[]
 
