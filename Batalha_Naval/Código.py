@@ -184,7 +184,6 @@ def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
 
 #Jogadas do jogador----------------------------------------------------------------------------------------------------------
 import random
-random.seed(2)
 frota_oponente = {
     'porta-aviões': [
         [[9, 1], [9, 2], [9, 3], [9, 4]]
