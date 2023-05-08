@@ -183,7 +183,8 @@ def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
         return texto
 
 #Jogadas do jogador----------------------------------------------------------------------------------------------------------
-
+import random
+random.seed(2)
 frota_oponente = {
     'porta-aviões': [
         [[9, 1], [9, 2], [9, 3], [9, 4]]
@@ -210,6 +211,7 @@ tabuleiro_jogador=posiciona_frota(dicfrotas)
 
 jogando=True
 lista_jogadas=[]
+lista_jogadas_op=[]
 while jogando:
     print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
     
@@ -239,5 +241,20 @@ while jogando:
         if afundados(frota_oponente, tabuleiro_oponente)==10:
             print('Parabéns! Você derrubou todos os navios do seu oponente!')
             jogando=False
+        else:
+            oponente=True
+            while oponente:
+                linha_oponente=random.randint(0,9)
+                coluna_oponente=random.randint(0,9)
+                y=[linha_oponente, coluna_oponente]
+                if y not in lista_jogadas_op:
+                    oponente=False
+                    lista_jogadas_op.append(y)
+                    tabuleiro_jogador=faz_jogada(tabuleiro_jogador, linha_oponente, coluna_oponente)
+                    print('Seu oponente está atacando na linha {0} e coluna {1}'.format(linha_oponente, coluna_oponente))
+                    if afundados(dicfrotas, tabuleiro_jogador)==10:
+                        print('Xi! O oponente derrubou toda a sua frota =(')
+                        jogando=False
 
-    
+
+
