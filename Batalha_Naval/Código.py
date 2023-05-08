@@ -209,11 +209,11 @@ tabuleiro_oponente=posiciona_frota(frota_oponente)
 tabuleiro_jogador=posiciona_frota(dicfrotas)
 
 jogando=True
-
+lista_jogadas=[]
 while jogando:
     print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
     
-    lista_jogadas=[]
+
 
     plinha=True
     while plinha:
@@ -232,7 +232,7 @@ while jogando:
             pcoluna=False
     x=[linha_ataque, coluna_ataque]
     if x in lista_jogadas:
-        print('A posição linha {0} e coluna {1} já foi informada anteriormente'.format(linha_ataque, coluna_ataque))
+        print('A posição linha {0} e coluna {1} já foi informada anteriormente!'.format(linha_ataque, coluna_ataque))
     else:
         lista_jogadas.append(x)
         tabuleiro_oponente=faz_jogada(tabuleiro_oponente, linha_ataque, coluna_ataque)
